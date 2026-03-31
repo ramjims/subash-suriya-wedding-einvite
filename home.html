@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Subash & Suriya Wedding Invitation</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Great+Vibes&family=Lato:wght@300;400&family=Noto+Sans+Tamil:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --gold-pale: #f5e6c0;
+    --cream: #fdf8f0;
+    --deep: #1a0e05;
+    --maroon: #6b1a1a;
+    --maroon-light: #9b3030;
+    --text: #3a2510;
+    --text-light: #6b4c2a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #0d0806;
+    font-family: 'Lato', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* ── பின்னணி துகள்கள் (Background Particles) ── */
+  #particles { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+
+  /* ── முதன்மை அட்டை (Main Card) ── */
+  .invitation {
+    position: relative;
+    z-index: 1;
+    max-width: 780px;
+    margin: 30px auto;
+    background: var(--cream);
+    box-shadow: 0 0 80px rgba(201,168,76,0.35), 0 0 200px rgba(201,168,76,0.15);
+    overflow: hidden;
+    animation: revealCard 1.8s cubic-bezier(0.2, 0, 0.2, 1) both;
+  }
+
+  @keyframes revealCard {
+    0% { opacity: 0; transform: scale(0.97); filter: blur(5px); }
+    100% { opacity: 1; transform: scale(1); filter: blur(0); }
+  }
+
+  /* ── இருதிசை அனிமேஷன் (Bidirectional Reveal) ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1s ease, transform 1s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+    will-change: transform, opacity;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── எல்லை மற்றும் அலங்காரங்கள் (Border & Ornaments) ── */
+  .border-frame {
+    position: absolute;
+    inset: 12px;
+    border: 1px solid var(--gold);
+    pointer-events: none;
+    z-index: 10;
+  }
+  .border-frame::before { content: ''; position: absolute; inset: 5px; border: 1px solid rgba(201,168,76,0.4); }
+  .corner { position: absolute; width: 50px; height: 50px; z-index: 11; }
+  .c-tl { top: 8px; left: 8px; }
+  .c-tr { top: 8px; right: 8px; transform: scaleX(-1); }
+  .c-bl { bottom: 8px; left: 8px; transform: scaleY(-1); }
+  .c-br { bottom: 8px; right: 8px; transform: scale(-1); }
+
+  /* ── தலைப்பு பகுதி (Header) ── */
+  .header {
+    background: linear-gradient(180deg, #1a0e05 0%, #2d1810 60%, #1a0e05 100%);
+    padding: 60px 40px 40px;
+    text-align: center;
+    position: relative;
+  }
+
+  .deity-circle {
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    border: 2px solid var(--gold);
+    display: inline-flex; align-items: center; justify-content: center;
+    background: radial-gradient(circle, rgba(201,168,76,0.2), transparent);
+    font-size: 28px;
+    margin: 0 10px;
+    box-shadow: 0 0 20px rgba(201,168,76,0.3);
+  }
+
+  .title-main {
+    font-family: 'Great Vibes', cursive;
+    font-size: 60px;
+    color: var(--gold-light);
+    margin: 20px 0;
+    text-shadow: 0 0 30px rgba(201,168,76,0.5);
+  }
+
+  /* ── மணமக்கள் பகுதி (Names Section) ── */
+  .names-section {
+    padding: 60px 40px;
+    text-align: center;
+    position: relative;
+    background: var(--cream);
+  }
+
+  .name-en {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 700;
+    color: var(--maroon);
+    margin-bottom: 5px;
+  }
+
+  .and-symbol {
+    font-family: 'Great Vibes', cursive;
+    font-size: 48px;
+    color: var(--gold);
+    margin: 15px 0;
+  }
+
+  /* ── நிகழ்வு மற்றும் இடம் (Event & Venue) ── */
+  .event-banner {
+    background: linear-gradient(135deg, var(--maroon) 0%, #8b2020 100%);
+    padding: 40px;
+    color: white;
+    text-align: center;
+  }
+
+  .event-date-en { font-family: 'Playfair Display', serif; font-size: 52px; font-weight: 700; }
+
+  /* ── தங்க இதழ்கள் (Elite Gold Petals) ── */
+  .petal {
+    position: fixed;
+    width: 12px; height: 18px;
+    background: linear-gradient(135deg, #f5e6c0, #c9a84c);
+    border-radius: 0 80% 0 80%;
+    pointer-events: none;
+    z-index: 0;
+    filter: drop-shadow(0 0 5px rgba(201,168,76,0.3));
+    animation: fall linear infinite;
+  }
+
+  @keyframes fall {
+    0% { transform: translateY(-10vh) rotate(0deg) translateX(0); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 0.8; }
+    100% { transform: translateY(110vh) rotate(720deg) translateX(150px); opacity: 0; }
+  }
+
+  @media (max-width: 600px) {
+    .name-en { font-size: 32px; }
+    .title-main { font-size: 48px; }
+    .event-date-en { font-size: 38px; }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+
+<div class="invitation">
+  <div class="border-frame"></div>
+  
+  <div class="corner c-tl"><svg viewBox="0 0 50 50"><path d="M2 2 L2 20 M2 2 L20 2" stroke="#c9a84c" stroke-width="1.5" fill="none"/></svg></div>
+  <div class="corner c-tr"><svg viewBox="0 0 50 50"><path d="M2 2 L2 20 M2 2 L20 2" stroke="#c9a84c" stroke-width="1.5" fill="none"/></svg></div>
+  <div class="corner c-bl"><svg viewBox="0 0 50 50"><path d="M2 2 L2 20 M2 2 L20 2" stroke="#c9a84c" stroke-width="1.5" fill="none"/></svg></div>
+  <div class="corner c-br"><svg viewBox="0 0 50 50"><path d="M2 2 L2 20 M2 2 L20 2" stroke="#c9a84c" stroke-width="1.5" fill="none"/></svg></div>
+
+  <header class="header">
+    <div class="reveal">
+      <div class="deity-icons">
+        <div class="deity-circle">🪔</div>
+        <div class="deity-circle" style="width:80px; height:80px; font-size:40px;">💍</div>
+        <div class="deity-circle">🪔</div>
+      </div>
+    </div>
+    
+    <div class="reveal">
+      <p style="color:var(--gold-light); letter-spacing:5px; margin-top:20px; font-weight:600;">✦ ஸ்ரீ மாமுண்டி சப்பாணி துணை ✦</p>
+    </div>
+
+    <div class="reveal">
+      <h1 class="title-main">Wedding Invitation</h1>
+      <p style="color:var(--gold-pale); letter-spacing:3px; text-transform:uppercase; font-size:12px;">திருமண அழைப்பிதழ்</p>
+    </div>
+  </header>
+
+  <section class="names-section">
+    <div class="reveal">
+      <p style="color:var(--gold); letter-spacing:4px; margin-bottom:25px; font-weight:bold;">மணமக்கள் · THE COUPLE</p>
+    </div>
+
+    <div class="reveal">
+      <div class="name-en">M. Subash</div>
+      <p style="font-size:14px; color:var(--text-light); margin-bottom:5px;">B.A. | Arasu Cable TV Corp, Chennai</p>
+    </div>
+
+    <div class="reveal">
+      <div class="and-symbol">&</div>
+    </div>
+
+    <div class="reveal">
+      <div class="name-en">Mangayarkarasi @ S. Suriya</div>
+      <p style="font-size:14px; color:var(--text-light);">M.B.A. </p>
+    </div>
+  </section>
+
+  <section class="event-banner reveal">
+    <div style="letter-spacing:5px; font-size:14px; margin-bottom:10px;">SUNDAY</div>
+    <div class="event-date-en">12 · 04 · 2026</div>
+    <div style="background:rgba(255,255,255,0.1); display:inline-block; padding:10px 25px; border-radius:30px; margin-top:20px; border:1px solid var(--gold-light);">
+      4:30 AM ONWARDS
+    </div>
+  </section>
+
+  <section class="venue-section reveal" style="padding:50px 40px; text-align:center;">
+    <div style="font-size:35px; margin-bottom:15px;">📍</div>
+    <h2 style="font-family:'Playfair Display'; color:var(--maroon); font-size:30px;">Sri Mahalakshmi Mahal</h2>
+    <p style="color:var(--text-light); font-style:italic; margin-top:10px; font-size:18px;">Punnainallur Mariamman Kovil, Thanjavur</p>
+  </section>
+
+  <section class="contact-section reveal" style="background:#1a0e05; color:white; padding:50px 40px; text-align:center;">
+    <p style="color:var(--gold); letter-spacing:4px; margin-bottom:15px;">In the joy of Inviting...</p>
+    <p style="font-size:24px; font-weight:bold;">M. Prakash, B.Com., (CA)</p>
+    <p style="color:var(--gold-light); font-style:italic; margin-top:5px;">TATA Consultancy Service</p>
+    <div style="margin-top:25px;">
+      <a href="tel:+919791241330" style="display:inline-flex; align-items:center; gap:10px; background:rgba(201,168,76,0.2); border:1px solid var(--gold); border-radius:30px; padding:12px 30px; color:var(--gold-light); text-decoration:none;">📞 97912 41330</a>
+    </div>
+  </section>
+</div>
+
+<script>
+// இருதிசை ஸ்க்ரோல் அனிமேஷன் லாஜிக் (Intersection Observer)
+const observerOptions = { threshold: 0.1 };
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible'); // பார்க்கும்போது தோன்றும்
+    } else {
+      entry.target.classList.remove('visible'); // விலகும்போது மறையும் (மீண்டும் அனிமேட் ஆக)
+    }
+  });
+}, observerOptions);
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// தங்க இதழ்கள் உருவாக்கும் முறை (Elite Gold Petals)
+(function(){
+  const petalCount = 30; // இதழ்களின் எண்ணிக்கை
+  for(let i=0; i < petalCount; i++){
+    const p = document.createElement('div');
+    p.className = 'petal';
+    p.style.left = Math.random() * 100 + 'vw';
+    p.style.animationDuration = (7 + Math.random() * 12) + 's'; // விழும் வேகம்
+    p.style.animationDelay = (Math.random() * 10) + 's';
+    p.style.width = (8 + Math.random() * 10) + 'px';
+    p.style.height = (12 + Math.random() * 10) + 'px';
+    document.body.appendChild(p);
+  }
+})();
+
+// பின்னணி துகள்கள் (Canvas Dust Particles)
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+let W, H;
+function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+window.onresize = resize; resize();
+
+let particles = Array.from({length: 60}, () => ({
+  x: Math.random() * W, y: Math.random() * H,
+  r: Math.random() * 1.5, d: Math.random() * 0.5
+}));
+
+function draw() {
+  ctx.clearRect(0, 0, W, H);
+  ctx.fillStyle = "rgba(201, 168, 76, 0.25)";
+  particles.forEach(p => {
+    ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI*2); ctx.fill();
+    p.y -= p.d; if(p.y < 0) p.y = H;
+  });
+  requestAnimationFrame(draw);
+}
+draw();
+</script>
+</body>
+</html>
