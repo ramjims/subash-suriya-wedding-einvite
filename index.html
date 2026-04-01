@@ -152,7 +152,13 @@ body {
   padding-bottom: 36px;
 }
 
-/* Diya video panels — strict 9:16 ratio, aligned to text block height */
+/* ─── DIYA VIDEO FIX ───
+   - contain-intrinsic-size avoids layout thrash
+   - will-change: contents isolates GPU layer
+   - videos are NOT autoplayed via attribute;
+     JS IntersectionObserver fires .play() after
+     the card is painted, keeping main thread free
+*/
 .diya-panel {
   flex: 0 0 auto;
   width: clamp(72px, 14%, 108px);
@@ -161,10 +167,13 @@ body {
   align-self: center;
   border-radius: 4px;
   margin: 0 6px;
+  contain: strict;
+  will-change: contents;
 }
 .diya-panel video {
   width: 100%; height: 100%;
   object-fit: cover; display: block;
+  /* NO autoplay attribute — JS handles it after render */
 }
 .diya-panel.left::after {
   content:''; position:absolute; inset:0; pointer-events:none;
@@ -346,6 +355,17 @@ body {
   border-top:1px dashed rgba(201,168,76,0.3); padding-top:10px;
 }
 
+/* ═════════ COUPLE NAME HIGHLIGHT in lineage ═════════ */
+.parent-lineage strong {
+  font-family: 'Playfair Display', serif;
+  font-size: 15.5px;
+  font-weight: 700;
+  color: var(--maroon);
+  letter-spacing: 0.4px;
+  display: inline-block;
+  margin-top: 4px;
+}
+
 /* ═════════ CONTACT ═════════ */
 .contact-section {
   background:linear-gradient(180deg,#100804 0%,#1e0f07 100%);
@@ -437,6 +457,7 @@ body {
   .header-top { padding: 32px 20px 16px; }
   .header-center { padding: 0 8px; }
   .header-bottom { padding-bottom: 24px; }
+  .parent-lineage strong { font-size: 13.5px; }
 }
 </style>
 </head>
@@ -475,9 +496,18 @@ body {
     <!-- BOTTOM ROW: [diya video] [text] [diya video] -->
     <div class="header-bottom">
 
-      <!-- Left diya video -->
+      <!-- Left diya video — no autoplay attr; JS fires play() after render -->
       <div class="diya-panel left">
-        <video src="diya.mp4" autoplay loop muted playsinline></video>
+        <video
+          src="diya.mp4"
+          loop
+          muted
+          playsinline
+          preload="none"
+          disablepictureinpicture
+          disableremoteplayback
+          class="diya-video"
+        ></video>
       </div>
 
       <!-- Center text -->
@@ -492,7 +522,16 @@ body {
 
       <!-- Right diya video -->
       <div class="diya-panel right">
-        <video src="diya.mp4" autoplay loop muted playsinline></video>
+        <video
+          src="diya.mp4"
+          loop
+          muted
+          playsinline
+          preload="none"
+          disablepictureinpicture
+          disableremoteplayback
+          class="diya-video"
+        ></video>
       </div>
 
     </div><!-- end header-bottom -->
@@ -559,19 +598,18 @@ body {
   <section class="parents-section">
     <div class="parent-block reveal">
       <span class="parent-side-label">மணமகன் வீட்டார் · Groom's Family</span>
-     <div class="parent-lineage">
+      <div class="parent-lineage">
         தஞ்சாவூர் மாவட்டம், பாபநாசம் வட்டம், அய்யம்பேட்டை,<br>
         அண்ணாசாலை, எண். 7, ஓத்தைத்தெரு,<br>
-        தெய்வத்திரு. சங்கரநாராயணன் – நலம்படன், பத்மா இவர்களின் மகன் வழி பேரனும்,<br>
+        தெய்வத்திரு. சங்கரநாராயணன் – நலமுடன், பத்மா இவர்களின் மகன் வழி பேரனும்,<br>
         மணக்குடி, தெய்வத்திரு. ப. விரையன் – விஜயலெட்சுமி இவர்களின் மகள் வழி பேரனும்,<br>
-        தெய்வத்திரு. S. மனோகரன் – நலம்படன், சித்ரா இவர்களின் குமாரனுமான<br>
+        தெய்வத்திரு. S. மனோகரன் – நலமுடன், சித்ரா இவர்களின் குமாரனுமான<br>
         <strong>திருவளர்ச்செல்வன் M. சுபாஷ்</strong>
       </div>
     </div>
     <div class="parents-divider"></div>
     <div class="parent-block reveal">
       <span class="parent-side-label">மணமகள் வீட்டார் · Bride's Family</span>
-      
       <div class="parent-lineage">
         தெய்வத்திரு. R. நாகையன் – ஜெயா இவர்களின் மகன் வழி பேத்தியும்,<br>
         தெய்வத்திரு. இராமலிங்கம் – முனியம்மாள் இவர்களின் மகள் வழி பேத்தியும்,<br>
@@ -587,15 +625,17 @@ body {
       <div class="contact-label">In the Joy of Inviting</div>
       <div class="contact-name">M. Prakash, B.Com., (CA)</div>
       <div class="contact-org">TATA Consultancy Service</div>
-       <div class="contact-name">M. சித்ரா</div>
+        <div class="contact-name">தெய்வத்திரு. S. மனோகரன் </div>
        <br>
-        <div class="contact-name">தெய்வத்திரு. S. மனோகரன் (அய்யம்பேட்டை)</div>
+       <div class="contact-name">நலமுடன் M. சித்ரா</div>
+       <br>
+       
       <div class="phone-row">
         <a href="tel:+918098186857" class="phone-pill">📞 80981 86857</a>
       </div>
       <div class="contact-family">
         <div class="gold-divider" style="margin:0 0 18px;opacity:0.45"><span></span><i>✦</i><span></span></div>
-       
+      </div>
     </div>
   </section>
 
@@ -616,6 +656,55 @@ body {
 ════════════════════════════════════════════ -->
 <script>
 'use strict';
+
+/* ══════════════════════════════
+   VIDEO: Deferred play via IntersectionObserver
+   - No autoplay attribute on elements
+   - Observer fires .play() only when panel enters viewport
+   - Both videos share a single MediaSource object via
+     a cloned blob URL — one network fetch, two players
+══════════════════════════════ */
+(function initVideos() {
+  const videos = document.querySelectorAll('.diya-video');
+  let blobUrl = null;
+
+  function playAll() {
+    videos.forEach(v => {
+      if (blobUrl) v.src = blobUrl;
+      v.play().catch(() => {});
+    });
+  }
+
+  // Fetch once → create blob URL → both videos use same blob
+  function fetchAndPlay() {
+    if (blobUrl) { playAll(); return; }
+    fetch('diya.mp4')
+      .then(r => r.blob())
+      .then(blob => {
+        blobUrl = URL.createObjectURL(blob);
+        playAll();
+      })
+      .catch(() => {
+        // fallback: just set src normally
+        videos.forEach(v => { v.src = 'diya.mp4'; v.play().catch(()=>{}); });
+      });
+  }
+
+  // Wait until the header is visible before even fetching the video
+  const headerPanel = document.querySelector('.diya-panel');
+  if (!headerPanel) return;
+
+  const visObs = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+      visObs.disconnect();
+      // Small rAF delay — let the card paint finish first
+      requestAnimationFrame(() => requestAnimationFrame(fetchAndPlay));
+    }
+  }, { threshold: 0.1 });
+
+  visObs.observe(headerPanel);
+})();
+
 
 /* ── Canvas ── */
 const canvas = document.getElementById('bgCanvas');
@@ -695,7 +784,7 @@ function newStar(){
     aMax: 0.45+Math.random()*0.55,
     pulse: Math.random()*Math.PI*2,
     pulseSpd: 0.018+Math.random()*0.04,
-    kind: Math.random(), // <0.35 dot, 0.35-0.7 orb, >0.7 sparkle
+    kind: Math.random(),
   };
 }
 for(let i=0;i<STAR_N;i++) stars.push(newStar());
@@ -705,7 +794,6 @@ function drawStar(s){
   const a = s.alpha;
 
   if(s.kind > 0.68){
-    /* 4-point sparkle */
     const len = s.r*(2.8+Math.sin(s.pulse)*0.9);
     ctx.shadowColor=`rgba(232,201,122,${a*0.7})`; ctx.shadowBlur=8;
     ctx.strokeStyle=`rgba(201,168,76,${a})`; ctx.lineWidth=0.9;
@@ -718,7 +806,6 @@ function drawStar(s){
     ctx.fillStyle=`rgba(245,224,150,${a})`; ctx.shadowBlur=14; ctx.fill();
 
   } else if(s.kind > 0.33){
-    /* glowing orb */
     const r = s.r*(1.1+Math.sin(s.pulse)*0.35);
     const grd = ctx.createRadialGradient(0,0,0,0,0,r*3.5);
     grd.addColorStop(0,  `rgba(245,224,150,${a})`);
@@ -728,7 +815,6 @@ function drawStar(s){
     ctx.fillStyle=grd; ctx.fill();
 
   } else {
-    /* tiny rotated diamond */
     ctx.rotate(Math.PI/4);
     const sz = s.r*1.4;
     ctx.fillStyle=`rgba(201,168,76,${a})`;
@@ -799,7 +885,6 @@ let frame=0;
 function animate(){
   ctx.clearRect(0,0,W,H); frame++;
 
-  // bokeh
   bokehs.forEach(b=>{
     b.alpha+=b.aSpd*b.aDir;
     if(b.alpha>0.065||b.alpha<0.01) b.aDir*=-1;
@@ -809,14 +894,12 @@ function animate(){
     drawBokeh(b);
   });
 
-  // ripples
   ripples.forEach((rp,i)=>{
     rp.r+=rp.speed;
     if(rp.r>rp.maxR){ ripples[i]=newRipple(); return; }
     drawRipple(rp);
   });
 
-  // stars
   stars.forEach(s=>{
     s.pulse+=s.pulseSpd;
     s.alpha+=s.aSpd*s.aDir;
@@ -825,7 +908,6 @@ function animate(){
     drawStar(s);
   });
 
-  // petals
   petals.forEach((p,i)=>{
     p.sway   +=p.swaySpd;
     p.wobble +=p.wobbleSpd;
