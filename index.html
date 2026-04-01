@@ -264,6 +264,18 @@ body {
 .venue-label { font-family:'Noto Sans Tamil',sans-serif; font-size:10px; color:var(--gold); letter-spacing:5px; text-transform:uppercase; margin-bottom:12px; }
 .venue-name { font-family:'Playfair Display',serif; font-size:28px; font-weight:700; color:var(--maroon); line-height:1.3; }
 .venue-address { font-family:'Cormorant Garamond',serif; font-size:17px; color:var(--text-light); font-style:italic; margin-top:10px; line-height:1.7; }
+.maps-link {
+  display: inline-flex; align-items: center; gap: 7px;
+  margin-top: 18px;
+  font-family: 'Lato', sans-serif; font-size: 13px;
+  color: var(--maroon);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  letter-spacing: 0.5px;
+  transition: color 0.25s, opacity 0.25s;
+  cursor: pointer;
+}
+.maps-link:hover { color: var(--maroon-light); opacity: 0.8; }
 
 /* ═════════ PARENTS ═════════ */
 .parents-section {
@@ -316,6 +328,45 @@ body {
 .footer { background:#050201; padding:20px 40px; text-align:center; }
 .footer p { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:13px; color:rgba(201,168,76,0.4); letter-spacing:1.5px; }
 
+/* ═════════ CREATOR CREDIT BOX ═════════ */
+.creator-credit {
+  position: relative; z-index: 10;
+  max-width: 780px;
+  margin: 0 auto 50px;
+  display: flex;
+  justify-content: center;
+}
+.creator-box {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid rgba(201,168,76,0.22);
+  border-radius: 6px;
+  padding: 9px 20px;
+  background: rgba(8,4,2,0.75);
+  backdrop-filter: blur(4px);
+}
+.creator-box span {
+  font-family: 'Lato', sans-serif;
+  font-size: 11px;
+  color: rgba(201,168,76,0.5);
+  letter-spacing: 0.5px;
+}
+.creator-box a {
+  font-family: 'Lato', sans-serif;
+  font-size: 11px;
+  color: rgba(201,168,76,0.75);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(201,168,76,0.4);
+  letter-spacing: 0.3px;
+  transition: color 0.25s, text-decoration-color 0.25s;
+}
+.creator-box a:hover {
+  color: var(--gold-light);
+  text-decoration-color: var(--gold-light);
+}
+
 /* ═════════ RESPONSIVE ═════════ */
 @media(max-width:620px){
   .invitation { margin:0 0 40px; }
@@ -329,6 +380,7 @@ body {
   .parents-divider { display:none; }
   .parent-block { text-align:center !important; padding:16px 20px; }
   .parent-block:first-child { border-bottom:1px dashed rgba(201,168,76,0.25); padding-bottom:24px; }
+  .creator-credit { margin: 0 12px 40px; }
 }
 </style>
 </head>
@@ -418,6 +470,11 @@ body {
       Punnainallur Mariamman Kovil,<br>
       <strong style="color:var(--maroon);font-style:normal;">தஞ்சாவூர் · Thanjavur</strong>
     </div>
+    <div style="margin-top:18px;">
+      <a href="https://share.google/ozuacqjJjLnQJkvJ6" target="_blank" rel="noopener noreferrer" class="maps-link">
+        🗺️ Open in Google Maps
+      </a>
+    </div>
   </section>
 
   <!-- PARENTS -->
@@ -466,6 +523,14 @@ body {
 
 
 </div><!-- end .invitation -->
+
+<!-- ══ CREATOR CREDIT ══ -->
+<div class="creator-credit">
+  <div class="creator-box">
+    <span>created by 🅾</span>
+    <a href="https://www.instagram.com/ramji.m.s?igsh=MWgxbjhlcjk5cXBzdw%3D%3D" target="_blank" rel="noopener noreferrer">@ramji.m.s</a>
+  </div>
+</div>
 
 
 <!-- ════════════════════════════════════════════
